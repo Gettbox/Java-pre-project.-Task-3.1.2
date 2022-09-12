@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <title>User details</title>
+</head>
+
+<h1>USER DETAILS</h1>
+
+<body>
+<form th:method="GET" th:action="@{user/{id}(id=${user.getId()})}" th:object="${user}">
+    <a th:each="role : *{roles}">
+        <p th:text="${role.name}"></p>
+    </a>
+    <hr/>
+    <p>Firstname: <a th:text="*{username}"></a></p>
+    <p>Email: <a th:text="*{email}"></a></p>
+    <p>Age: <a th:text="*{age}"></a></p>
+    <p>Password: <a th:text="*{password}"></a></p>
+    <a th:each="role : *{roles}">
+        <div th:switch="${role.name}">
+            <a th:case="'ROLE_ADMIN'">
+                <hr/>
+                <a href="/admin/users">List of Users</a></a>
+        </div>
+    </a>
+    <hr/>
+    <a th:href="@{/}">Home page</a>
+    <hr/>
+    <a th:href="@{/logout}">Logout</a>
+</form>
+</body>
+
+</html>
